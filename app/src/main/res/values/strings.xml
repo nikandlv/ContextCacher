@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ContextCacherExample</string>
+    <string name="title_activity_message_reader">MessageReader</string>
+</resources>
