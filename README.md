@@ -8,13 +8,21 @@ File >  New > New Module > Import .JAR/.AAR
 Create an Application class Extending `ContextCacheApplication`
 make sure you add the name to application in manifest `code`
 Then bind the Cache in your activity
+```java
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        ...
+        ContextCache cache = new ContextCache();
+        // returns a boolean. true if application context is right
+        cache.bind(this);
+        ...
+    }
+```
 You can set a value like so
 ```java
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        
+        ...
         ContextCache cache = new ContextCache();
         if(cache.bind(this)) {
             // this is a cache context
@@ -22,16 +30,16 @@ You can set a value like so
         } else {
             // the context is not from ContextCacheApplication
         }
-
+        ...
     }
 ```
 And to read it back in another activity/service
 ```java
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        ...
         String message;
+        
         ContextCache cache = new ContextCache();
         if(cache.bind(this)) {
             message = (String) cache.get("message_from_context");
@@ -39,6 +47,6 @@ And to read it back in another activity/service
             // the context is not from ContextCacheApplication
             message = "no message";
         }
-
+        ...
     }
 ```
